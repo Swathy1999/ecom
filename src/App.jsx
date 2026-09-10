@@ -9,8 +9,6 @@ import Cart from "./pages/Cart"
 import Wishlist from "./pages/Wishlist"
 import Pnf from "./pages/Pnf"
 
-import Navbar from "./components/Navbar"
-import ProductList from "./components/ProductList"
 import View from "./pages/View"
 
 

@@ -9,20 +9,18 @@ import {
   faCartPlus,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { searchProduct } from "../redux/slices/productSlice";
 
-function Header() {
+function Header({ insideHeader }) {
+  const dispatch = useDispatch();
   return (
     <Navbar expand="lg" className="bg-primary fixed-top">
       <Container>
-
         {/* Logo */}
         <Navbar.Brand>
-          <Link
-            to="/"
-            className="text-light text-decoration-none fw-bold"
-          >
-            <FontAwesomeIcon icon={faTruckFast} className="me-2" />
-            E CART
+          <Link to="/" className="text-light text-decoration-none fw-bold">
+            <FontAwesomeIcon icon={faTruckFast} className="me-2" />E CART
           </Link>
         </Navbar.Brand>
 
@@ -30,32 +28,25 @@ function Header() {
 
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto align-items-center gap-3">
-
             {/* Search */}
-            <Nav.Item>
-              <div className="input-group">
+            {insideHeader && (
+              <Nav.Item>
                 <input
+                  onChange={(e) => dispatch(searchProduct(e.target.value))}
                   type="text"
                   className="form-control"
                   placeholder="Search Products Here.."
                 />
-
-                <button className="btn btn-light">
-                  <FontAwesomeIcon icon={faSearch} />
-                </button>
-              </div>
-            </Nav.Item>
+              </Nav.Item>
+            )}
 
             {/* Wishlist */}
             <Link
               to="/wishlist"
               className="text-light text-decoration-none fw-bold"
             >
-              <FontAwesomeIcon
-                icon={faHeart}
-                className="text-danger me-1"
-              />
-              Wishlist{" "}
+              <FontAwesomeIcon icon={faHeart} className="text-danger me-1" />
+              Wishlist
               <Badge pill bg="secondary">
                 10
               </Badge>
@@ -70,15 +61,13 @@ function Header() {
                 icon={faCartPlus}
                 className="text-success me-1"
               />
-              Cart{" "}
+              Cart
               <Badge pill bg="secondary">
                 10
               </Badge>
             </Link>
-
           </Nav>
         </Navbar.Collapse>
-
       </Container>
     </Navbar>
   );
